@@ -14,4 +14,8 @@ Rails.application.routes.draw do
   patch "review/:id", to: "reviews#update"
   get "/me", to: "users#show"
   get "/projects/:id", to: "posts#show"
+
+  get '*path',
+  to: 'fallback#index',
+  constraints: ->(req) { !req.xhr? && req.format.html? }
 end
